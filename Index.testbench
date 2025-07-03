@@ -1,0 +1,45 @@
+`timescale 1ns / 1ps
+
+module tb_fir_filter;
+    reg clk;
+    reg rst;
+    reg signed [15:0] x;
+    wire signed [31:0] y;
+
+    fir_filter uut (
+        .clk(clk),
+        .rst(rst),
+        .x(x),
+        .y(y)
+    );
+
+    // Clock generation
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;  // 10 ns clock period
+    end
+
+    // ✅ VCD dump setup
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_fir_filter);
+    end
+
+    // Test stimulus
+    initial begin
+        rst = 1;
+        x = 0;
+        #20 rst = 0;
+
+        #10 x = 16'd100;
+        #10 x = 16'd200;
+        #10 x = 16'd0;
+        #10 x = -16'd100;
+        #10 x = -16'd200;
+        #10 x = 16'd0;
+        #10 x = 16'd100;
+        #10 x = 16'd0;
+
+        #50 $finish;
+    end
+endmodule
