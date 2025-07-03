@@ -47,3 +47,4 @@ In MATLAB, you can plot the filtered output and see how it changes.
 
 In Verilog, you create a testbench and simulate the design using a tool like ModelSim to view waveforms. 
 #OUTPUT
+![Image](https://github.com/user-attachments/assets/4985383d-656e-49f7-8ab2-8c09a07a2d96)
